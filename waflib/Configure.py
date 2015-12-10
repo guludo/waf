@@ -99,6 +99,15 @@ class ConfigurationContext(Context.Context):
 
 	env = property(get_env, set_env)
 
+	def get_vbldnode(self):
+		"""Getter for the vbldnode property"""
+		if not self.variant:
+			return self.bldnode
+		return self.bldnode.make_node(self.variant)
+
+	vbldnode = property(get_vbldnode, None)
+	"""Node that would be used by a variant build as bldnode"""
+
 	def init_dirs(self):
 		"""
 		Initialize the project directory and the build directory
